@@ -4,6 +4,10 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+
+env:
+  PW_REPORT_PATH: ~/pw
+
 jobs:
   test:
     timeout-minutes: 60
@@ -17,14 +21,16 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
+    - name: Create Report Directory
+      run: mkdir -p $PW_REPORT_PATH
     - name: Run Playwright tests
       run: npx playwright test
       env:
         CI: true
-        PLAYWRIGHT_HTML_REPORT: 'playwright-report'
+        PLAYWRIGHT_HTML_REPORT: $PW_REPORT_PATH
     - uses: actions/upload-artifact@v3
       if: always()
       with:
         name: playwright-report
-        path: playwright-report/
+        path: ~/pw/**/*
         retention-days: 30
