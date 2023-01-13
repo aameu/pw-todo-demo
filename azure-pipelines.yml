@@ -30,11 +30,11 @@ jobs:
             failOnStderr: true
             script: |
               npm ci
-              DEBUG=pw:api npx playwright test --reporter=junit
+              npx playwright test --reporter=junit
         - task: PublishTestResults@2
           displayName: 'Publish test results'
           inputs:
-#            searchFolder: 'tests/test-results'
+            searchFolder: 'tests'
             testResultsFormat: 'JUnit'
 #            testResultsFiles: 'e2e-junit-results.xml' 
             testResultsFiles: '**/*-results.xml' 
