@@ -27,7 +27,7 @@ jobs:
       run: npx playwright test
       env:
         CI: true
-        PLAYWRIGHT_HTML_REPORT: $PW_REPORT_PATH
+        PLAYWRIGHT_HTML_REPORT: "$PW_REPORT_PATH"
     - uses: actions/upload-artifact@v3
       if: always()
       with:
