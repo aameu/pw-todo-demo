@@ -31,14 +31,14 @@ jobs:
             script: |
               npm ci
               env
-              npx playwright test --reporter=junit
+              npx playwright test
         - task: PublishTestResults@2
           displayName: 'Publish test results'
           inputs:
-            searchFolder: 'TestResults'
+#            searchFolder: 'tests'
             testResultsFormat: 'JUnit'
 #            testResultsFiles: 'e2e-junit-results.xml' 
-            testResultsFiles: '**/*-results.xml' 
+            testResultsFiles: '**/*.xml' 
             mergeTestResults: true
             failTaskOnFailedTests: true
             testRunTitle: 'End-To-End Tests'
