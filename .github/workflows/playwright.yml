@@ -24,7 +24,7 @@ jobs:
     - name: Create Report Directory
       run: mkdir -p $PW_REPORT_PATH
     - name: Run Playwright tests
-      run: npx playwright test
+      run: npx playwright test --reporter=html
       env:
         CI: true
         PLAYWRIGHT_HTML_REPORT: ${{env.PW_REPORT_PATH}}
