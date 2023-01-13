@@ -1,0 +1,33 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+#pool:
+#  vmImage: ubuntu-latest
+
+jobs:
+    - deployment: Run_E2E_Tests
+      pool:
+        vmImage: ubuntu-20.04
+      container: mcr.microsoft.com/playwright:v1.29.0-focal
+      environment: testing
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - checkout: self
+            - task: Bash@3
+              displayName: 'Run Playwright tests'
+              inputs:
+                workingDirectory: 'my-e2e-tests'
+                targetType: 'inline'
+                failOnStderr: true
+                env:
+                  CI: true
+                script: |
+                  npm ci
+                  npx playwright test
