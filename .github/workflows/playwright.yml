@@ -5,15 +5,15 @@ on:
   pull_request:
     branches: [ main, master ]
 
-env:
-  PW_REPORT_PATH: ~/pw
-
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - name: Set Report PATH
+      run: |
+        echo "report_dir=$HOME/pw" >> $GITHUB_ENV
     - uses: actions/setup-node@v3
       with:
         node-version: 16
@@ -22,12 +22,12 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Create Report Directory
-      run: mkdir -p $PW_REPORT_PATH
+      run: mkdir -p ${{ env.report_dir }}
     - name: Run Playwright tests
       run: npx playwright test --reporter=html
       env:
         CI: true
-        PLAYWRIGHT_HTML_REPORT: ${{env.PW_REPORT_PATH}}
+        PLAYWRIGHT_HTML_REPORT: ${{env.report_dir}}
     - uses: actions/upload-artifact@v3
       if: always()
       with:
