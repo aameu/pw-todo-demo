@@ -19,6 +19,9 @@ jobs:
       run: npx playwright install --with-deps
     - name: Run Playwright tests
       run: npx playwright test
+      env:
+        CI: true
+        PLAYWRIGHT_HTML_REPORT: 'playwright-report'
     - uses: actions/upload-artifact@v3
       if: always()
       with:
