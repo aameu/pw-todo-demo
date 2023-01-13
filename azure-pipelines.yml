@@ -30,6 +30,7 @@ jobs:
             failOnStderr: true
             script: |
               npm ci
+              env
               npx playwright test --reporter=junit
         - task: PublishTestResults@2
           displayName: 'Publish test results'
