@@ -34,9 +34,10 @@ jobs:
         - task: PublishTestResults@2
           displayName: 'Publish test results'
           inputs:
-            searchFolder: 'tests/test-results'
+#            searchFolder: 'tests/test-results'
             testResultsFormat: 'JUnit'
-            testResultsFiles: 'e2e-junit-results.xml' 
+#            testResultsFiles: 'e2e-junit-results.xml' 
+            testResultsFiles: '**/*-results.xml' 
             mergeTestResults: true
             failTaskOnFailedTests: true
             testRunTitle: 'End-To-End Tests'
