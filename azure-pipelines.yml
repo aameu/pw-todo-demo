@@ -35,7 +35,7 @@ jobs:
         - task: PublishTestResults@2
           displayName: 'Publish test results'
           inputs:
-            searchFolder: 'tests'
+            searchFolder: 'TestResults'
             testResultsFormat: 'JUnit'
 #            testResultsFiles: 'e2e-junit-results.xml' 
             testResultsFiles: '**/*-results.xml' 
