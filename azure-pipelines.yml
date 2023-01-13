@@ -24,14 +24,14 @@ jobs:
           displayName: 'Run Playwright tests'
           env:
             CI: true
+            PLAYWRIGHT_JUNIT_OUTPUT_NAME: 'e2e-junit-results.xml'
           inputs:
             workingDirectory: 'tests'
             targetType: 'inline'
             failOnStderr: true
             script: |
               npm ci
-              env
-              npx playwright test
+              npx playwright test --reporter=junit
         - task: PublishTestResults@2
           displayName: 'Publish test results'
           inputs:
